@@ -7,11 +7,12 @@
 //
 
 #import <CoreData/CoreData.h>
+#import "NSManagedObject+Extensions.h"
 
 @interface Item : NSManagedObject
 
 @property (strong, nonatomic) NSString *title;
+@property (strong, nonatomic) NSSet *images;
 
-+(instancetype) createInMoc:(NSManagedObjectContext*) moc;
 
 @end

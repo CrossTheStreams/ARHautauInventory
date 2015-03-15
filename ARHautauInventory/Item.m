@@ -11,10 +11,10 @@
 @implementation Item
 
 @dynamic title;
+@dynamic images;
 
-+(instancetype) createInMoc:(NSManagedObjectContext*) moc {
-    Item *item = [NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:moc];
-    return item;
++(NSString*) entityName {
+    return @"Item";
 }
 
 @end
