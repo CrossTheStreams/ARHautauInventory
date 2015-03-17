@@ -10,6 +10,8 @@
 
 @interface ViewController : NSViewController
 
+@property (weak) IBOutlet NSButton *showButton;
+@property (weak) IBOutlet NSButton *getPicsButton;
 
 @end
 

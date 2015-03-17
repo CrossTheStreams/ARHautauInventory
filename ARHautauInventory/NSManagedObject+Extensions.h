@@ -1,17 +1,19 @@
 //
-//  NSManagedObject+Extensions.h
-//  ARHautauInventory
+//  Extensions.h
+//  Inventory
 //
-//  Created by Andrew Hautau on 3/15/15.
-//  Copyright (c) 2015 Andrew Hautau. All rights reserved.
+//  Created by Martin Nash on 3/1/15.
+//  Copyright (c) 2015 Martin Nash. All rights reserved.
 //
 
 #import <CoreData/CoreData.h>
 
 @interface NSManagedObject (Extensions)
 
-+(NSString*) entityName;
-+(instancetype) createInMoc:(NSManagedObjectContext*) moc;
-
++(NSString*)entityName; // must override
++(instancetype)createInMoc:(NSManagedObjectContext*)moc;
++(NSArray*)allInContext:(NSManagedObjectContext*)moc;
++(NSFetchRequest*)basicFetchRequest;
++(void)deleteAllInMoc:(NSManagedObjectContext*)ctx;
 
 @end

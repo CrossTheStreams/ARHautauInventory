@@ -63,5 +63,58 @@
 
     // Update the view, if already loaded.
 }
+- (IBAction)clickedShow:(id)sender {
+    
+    NSLog(@"clicked %s", __PRETTY_FUNCTION__);
+    NSStoryboard *sb = [NSStoryboard storyboardWithName:@"Main" bundle:nil];
+    NSViewController *vc = [sb instantiateControllerWithIdentifier:@"BlueVC"];
+    
+//    present as sheet
+//    [self presentViewControllerAsSheet:vc];
+    
+//    present as modal window
+//    [self presentViewControllerAsModalWindow:vc];
+    
+    
+//    present as popover relative to rect
+//    NSButton *btn = self.showButton;
+//    [self presentViewController:vc
+//        asPopoverRelativeToRect: btn.bounds
+//                         ofView: btn
+//                  preferredEdge: NSMaxYEdge
+//                       behavior: NSPopoverBehaviorTransient];
+ 
+    
+}
+
+-(IBAction) clickedGetPics:(id)sender {
+
+    NSOpenPanel *op = [NSOpenPanel openPanel];
+    op.allowsMultipleSelection = YES;
+    
+    NSString *path = [@"~/Desktop" stringByExpandingTildeInPath];
+    NSURL *url = [NSURL fileURLWithPath: path];
+    [op setDirectoryURL: url];
+    
+    
+    [op beginWithCompletionHandler:^(NSInteger result) {
+        if (result == YES) {
+            NSLog(@"%@",op.URLs);
+            
+            // for each url in urls
+                //make core data Image entity
+            // entity has UUID
+            // copy image to secure location /com.myapp.Images/uuid.png
+            
+            NSError *error = nil;
+            NSURL *mySecretURL = nil;
+            
+            [[NSFileManager defaultManager] copyItemAtURL: op.URL toURL: mySecretURL error: &error];
+        }
+        
+    
+    }];
+    
+}
 
 @end

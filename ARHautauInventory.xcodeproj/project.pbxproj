@@ -18,6 +18,7 @@
 		492E21371AA958CF00E5E40A /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 492E21361AA958CF00E5E40A /* Item.m */; };
 		F9837C1B1AB633D700D947E4 /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = F9837C1A1AB633D700D947E4 /* Image.m */; };
 		F9837C211AB6386500D947E4 /* NSManagedObject+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = F9837C201AB6386500D947E4 /* NSManagedObject+Extensions.m */; };
+		F9837C241AB6515400D947E4 /* BlueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9837C231AB6515400D947E4 /* BlueViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,8 @@
 		F9837C1A1AB633D700D947E4 /* Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Image.m; sourceTree = "<group>"; };
 		F9837C1F1AB6386500D947E4 /* NSManagedObject+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+Extensions.h"; sourceTree = "<group>"; };
 		F9837C201AB6386500D947E4 /* NSManagedObject+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+Extensions.m"; sourceTree = "<group>"; };
+		F9837C221AB6515400D947E4 /* BlueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlueViewController.h; sourceTree = "<group>"; };
+		F9837C231AB6515400D947E4 /* BlueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlueViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +106,8 @@
 				492E212F1AA9582600E5E40A /* Inventory.xcdatamodeld */,
 				492E21131AA9533000E5E40A /* Images.xcassets */,
 				492E21151AA9533000E5E40A /* Main.storyboard */,
+				F9837C221AB6515400D947E4 /* BlueViewController.h */,
+				F9837C231AB6515400D947E4 /* BlueViewController.m */,
 				492E21091AA9533000E5E40A /* Supporting Files */,
 			);
 			path = ARHautauInventory;
@@ -254,6 +259,7 @@
 				492E210D1AA9533000E5E40A /* AppDelegate.m in Sources */,
 				F9837C1B1AB633D700D947E4 /* Image.m in Sources */,
 				F9837C211AB6386500D947E4 /* NSManagedObject+Extensions.m in Sources */,
+				F9837C241AB6515400D947E4 /* BlueViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
