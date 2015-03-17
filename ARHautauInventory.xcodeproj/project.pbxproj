@@ -19,6 +19,8 @@
 		F9837C1B1AB633D700D947E4 /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = F9837C1A1AB633D700D947E4 /* Image.m */; };
 		F9837C211AB6386500D947E4 /* NSManagedObject+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = F9837C201AB6386500D947E4 /* NSManagedObject+Extensions.m */; };
 		F9837C241AB6515400D947E4 /* BlueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9837C231AB6515400D947E4 /* BlueViewController.m */; };
+		F9837C271AB80E1100D947E4 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = F9837C261AB80E1100D947E4 /* Location.m */; };
+		F9837C2A1AB80E2200D947E4 /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = F9837C291AB80E2200D947E4 /* Tag.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +57,10 @@
 		F9837C201AB6386500D947E4 /* NSManagedObject+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+Extensions.m"; sourceTree = "<group>"; };
 		F9837C221AB6515400D947E4 /* BlueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlueViewController.h; sourceTree = "<group>"; };
 		F9837C231AB6515400D947E4 /* BlueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlueViewController.m; sourceTree = "<group>"; };
+		F9837C251AB80E1100D947E4 /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
+		F9837C261AB80E1100D947E4 /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
+		F9837C281AB80E2200D947E4 /* Tag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tag.h; sourceTree = "<group>"; };
+		F9837C291AB80E2200D947E4 /* Tag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tag.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +154,10 @@
 				492E21361AA958CF00E5E40A /* Item.m */,
 				F9837C191AB633D700D947E4 /* Image.h */,
 				F9837C1A1AB633D700D947E4 /* Image.m */,
+				F9837C251AB80E1100D947E4 /* Location.h */,
+				F9837C261AB80E1100D947E4 /* Location.m */,
+				F9837C281AB80E2200D947E4 /* Tag.h */,
+				F9837C291AB80E2200D947E4 /* Tag.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -251,12 +261,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9837C2A1AB80E2200D947E4 /* Tag.m in Sources */,
 				492E21371AA958CF00E5E40A /* Item.m in Sources */,
 				492E212E1AA953D900E5E40A /* ConfigurableCoreDataStack.m in Sources */,
 				492E21121AA9533000E5E40A /* ViewController.m in Sources */,
 				492E21311AA9582600E5E40A /* Inventory.xcdatamodeld in Sources */,
 				492E210F1AA9533000E5E40A /* main.m in Sources */,
 				492E210D1AA9533000E5E40A /* AppDelegate.m in Sources */,
+				F9837C271AB80E1100D947E4 /* Location.m in Sources */,
 				F9837C1B1AB633D700D947E4 /* Image.m in Sources */,
 				F9837C211AB6386500D947E4 /* NSManagedObject+Extensions.m in Sources */,
 				F9837C241AB6515400D947E4 /* BlueViewController.m in Sources */,

@@ -6,10 +6,20 @@
     </entity>
     <entity name="Item" representedClassName="Item" syncable="YES">
         <attribute name="title" attributeType="String" syncable="YES"/>
-        <relationship name="images" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Image" inverseName="item" inverseEntity="Image" syncable="YES"/>
+        <relationship name="images" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Image" inverseName="item" inverseEntity="Image" syncable="YES"/>
+        <relationship name="location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="item" inverseEntity="Location" syncable="YES"/>
+        <relationship name="tags" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="items" inverseEntity="Tag" syncable="YES"/>
+    </entity>
+    <entity name="Location" representedClassName="Location" syncable="YES">
+        <relationship name="item" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Item" inverseName="location" inverseEntity="Item" syncable="YES"/>
+    </entity>
+    <entity name="Tag" representedClassName="Tag" syncable="YES">
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="tags" inverseEntity="Item" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Item" positionX="-63" positionY="-18" width="128" height="73"/>
+        <element name="Item" positionX="-63" positionY="-18" width="128" height="103"/>
         <element name="Image" positionX="-63" positionY="-9" width="128" height="73"/>
+        <element name="Location" positionX="-45" positionY="18" width="128" height="58"/>
+        <element name="Tag" positionX="-36" positionY="27" width="128" height="58"/>
     </elements>
 </model>
