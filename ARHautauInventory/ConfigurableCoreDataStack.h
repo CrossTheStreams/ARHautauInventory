@@ -9,6 +9,7 @@
 @import CoreData;
 
 
+
 /// Data stack configuration protocol
 @protocol StackConfigurator <NSObject>
 -(NSString*)storeType;
@@ -35,6 +36,7 @@
 
 /// Stack can be configured
 @interface ConfigurableCoreDataStack : NSObject
++(instancetype) defaultStack;
 -(instancetype)initWithConfiguration:(CoreDataStackConfiguration*)configuration;
 -(instancetype)initWithConfigurator:(id<StackConfigurator>)configurator;
 +(instancetype)stackWithConfiguration:(CoreDataStackConfiguration*)configuration;

@@ -34,6 +34,23 @@
 
 @implementation ConfigurableCoreDataStack
 
++(instancetype)defaultStack {
+    static ConfigurableCoreDataStack *defaultStack = nil;
+    @synchronized(self) {
+        if (defaultStack == nil) {
+            // Insert code here to initialize your application
+            CoreDataStackConfiguration *config = [[CoreDataStackConfiguration alloc] init];
+            [config setStoreType: NSSQLiteStoreType];
+            [config setModelName: @"Item"];
+            [config setAppIdentifier:@"com.ARHautauInventory"];
+            [config setDataFileNameWithExtension:@"ARHautauInventory.sqlite"];
+            [config setSearchPathDirectory: NSApplicationSupportDirectory];
+            defaultStack = [[ConfigurableCoreDataStack alloc] initWithConfiguration: config];
+        }
+    }
+    return defaultStack;
+}
+
 +(instancetype)stackWithConfiguration:(CoreDataStackConfiguration *)configuration
 {
     return [[self alloc] initWithConfiguration:configuration];

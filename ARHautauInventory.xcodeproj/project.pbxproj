@@ -102,11 +102,10 @@
 		492E21081AA9533000E5E40A /* ARHautauInventory */ = {
 			isa = PBXGroup;
 			children = (
+				F9837C2C1AB958F100D947E4 /* ViewControllers */,
 				F9837C181AB633AC00D947E4 /* Models */,
 				492E210B1AA9533000E5E40A /* AppDelegate.h */,
 				492E210C1AA9533000E5E40A /* AppDelegate.m */,
-				492E21101AA9533000E5E40A /* ViewController.h */,
-				492E21111AA9533000E5E40A /* ViewController.m */,
 				492E212C1AA953D900E5E40A /* ConfigurableCoreDataStack.h */,
 				492E212D1AA953D900E5E40A /* ConfigurableCoreDataStack.m */,
 				492E212F1AA9582600E5E40A /* Inventory.xcdatamodeld */,
@@ -160,6 +159,23 @@
 				F9837C291AB80E2200D947E4 /* Tag.m */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		F9837C2B1AB958E700D947E4 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Delegates;
+			sourceTree = "<group>";
+		};
+		F9837C2C1AB958F100D947E4 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				F9837C2B1AB958E700D947E4 /* Delegates */,
+				492E21101AA9533000E5E40A /* ViewController.h */,
+				492E21111AA9533000E5E40A /* ViewController.m */,
+			);
+			name = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

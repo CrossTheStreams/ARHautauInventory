@@ -15,47 +15,40 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Insert code here to initialize your application
-    CoreDataStackConfiguration *config = [[CoreDataStackConfiguration alloc] init];
-    [config setStoreType: NSSQLiteStoreType];
-    [config setModelName: @"Item"];
-    [config setAppIdentifier:@"com.ARHautauInventory"];
-    [config setDataFileNameWithExtension:@"ARHautauInventory.sqlite"];
-    [config setSearchPathDirectory: NSApplicationSupportDirectory];
+    [self.tableView setDataSource:self];
+    [self.tableView setDelegate:self];
     
-    ConfigurableCoreDataStack *stack = [[ConfigurableCoreDataStack alloc] initWithConfiguration: config];
+//    for (int i = 0; i < 5; i++) {
+//        Item *item = [Item createInMoc: [self moc]];
+//        NSString *title = [NSString stringWithFormat: @"item %d", i + 1];
+//        
+//        [item setTitle: title];
+//        NSError *saveError = nil;
+//        
+//        BOOL success = [[self moc] save: &saveError];
+//        
+//        if (!success) {
+//            [[NSApplication sharedApplication] presentError:saveError];
+//        }
+//        NSLog(@"%@",item);
+//    }
     
-    NSManagedObjectContext * moc = stack.managedObjectContext;
-    
-    Item *item = [Item createInMoc: moc];
-    
-
-    [item setTitle:@"An error will be presented if this is nil"];
-    
-    NSError *saveError = nil;
-    
-    BOOL success = [moc save: &saveError];
-    
-    if (!success) {
-        [[NSApplication sharedApplication] presentError:saveError];
-    }
-    
-    NSLog(@"%@",item);
-    
-    NSFetchRequest *fr = [NSFetchRequest fetchRequestWithEntityName:@"Item"];
-    NSError *fetchError = nil;
-    NSArray *allItems = [moc executeFetchRequest:fr error:&fetchError];
+//    NSFetchRequest *fr = [NSFetchRequest fetchRequestWithEntityName:@"Item"];
+//    NSError *fetchError = nil;
+//    NSArray *allItems = [moc executeFetchRequest:fr error:&fetchError];
     
     // Do any additional setup after loading the view.
     
-    NSLog(@"%@",allItems);
+//    NSLog(@"%@",allItems);
 
     // delete all items
-    for (Item *singleItem in allItems) {
-        [moc deleteObject: singleItem];
-    }
+//    for (Item *singleItem in allItems) {
+//        [moc deleteObject: singleItem];
+//    }
+//    
+//    [moc save: nil];
     
-    [moc save: nil];
+    [self updateTableViewWithTitles:[self itemTitles]];
 }
 
 - (void)setRepresentedObject:(id)representedObject {
@@ -63,6 +56,24 @@
 
     // Update the view, if already loaded.
 }
+
+-(NSManagedObjectContext*) moc {
+    return [[ConfigurableCoreDataStack defaultStack] managedObjectContext];
+}
+
+-(NSArray*) allItems {
+    NSFetchRequest *fr = [NSFetchRequest fetchRequestWithEntityName:@"Item"];
+    NSError *fetchError = nil;
+    NSArray *items= [[self moc] executeFetchRequest:fr error:&fetchError];
+    return items;
+}
+
+-(NSArray*) itemTitles {
+    NSArray *items = [self allItems];
+    NSArray *titles = [items valueForKey: @"title"];
+    return titles;
+}
+
 - (IBAction)clickedShow:(id)sender {
     
     NSLog(@"clicked %s", __PRETTY_FUNCTION__);
@@ -86,6 +97,34 @@
  
     
 }
+
+-(void)updateTableViewWithTitles:(NSArray *)titles {
+    [self setTitleArray: titles];
+    [[self tableView] reloadData];
+}
+
+
+- (NSView *)tableView:(NSTableView *)tableView
+   viewForTableColumn:(NSTableColumn *)tableColumn
+                  row:(NSInteger)row {
+    
+    NSTableCellView *result = [tableView makeViewWithIdentifier:@"TableCellView" owner:nil];
+    
+    result.textField.stringValue = [self.titleArray objectAtIndex:row];
+    
+    if (row % 2) {
+        [result.layer setBackgroundColor: [[NSColor lightGrayColor] CGColor]];
+    }
+    
+    return result;
+}
+
+-(NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
+    return [self.titleArray count];
+}
+
+
+
 
 -(IBAction) clickedGetPics:(id)sender {
 
@@ -116,5 +155,6 @@
     }];
     
 }
+
 
 @end
