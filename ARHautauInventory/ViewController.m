@@ -7,8 +7,11 @@
 //
 
 #import "ViewController.h"
+#import "BlueViewController.h"
 #import "ConfigurableCoreDataStack.h"
 #import "Item.h"
+#import "Location.h"
+#import "Tag.h"
 
 @implementation ViewController
 
@@ -18,21 +21,54 @@
     [self.tableView setDataSource:self];
     [self.tableView setDelegate:self];
     
-//    for (int i = 0; i < 5; i++) {
-//        Item *item = [Item createInMoc: [self moc]];
-//        NSString *title = [NSString stringWithFormat: @"item %d", i + 1];
-//        
-//        [item setTitle: title];
-//        NSError *saveError = nil;
-//        
-//        BOOL success = [[self moc] save: &saveError];
-//        
-//        if (!success) {
-//            [[NSApplication sharedApplication] presentError:saveError];
-//        }
-//        NSLog(@"%@",item);
-//    }
+    NSManagedObject *moc = [self moc];
     
+    // All the horcruxes in Harry Potter
+    NSArray *horcruxNames = @[
+                              @"Tom Riddle's diary",
+                              @"HufflePuff's Cup",
+                              @"Ravenclaw's Diadem",
+                              @"Slytherin's Locket",
+                              @"Marvolo Gaunt's Ring",
+                              @"Nagini",
+                              @"Harry Potter"
+                              ];
+    
+    NSArray *locations = @[
+                           @"https://www.google.com/maps/@54.039912,-2.793961,8z",
+                           @"https://www.google.com/maps/@54.9327639,-1.8316274,8z",
+                           @"https://www.google.com/maps/@55.819319,-4.682922,8z",
+                           @"https://www.google.com/maps/@55.452262,-4.539413,8z",
+                           @"https://www.google.com/maps/@51.503480,-0.139389,8z",
+                           @"https://www.google.com/maps/@51.441035,-0.198441,8z",
+                           @"https://www.google.com/maps/@51.476118,-0.070724,8z"
+                           ];
+    
+    
+    
+    NSArray *currentItems = [self allItems];
+    [Item deleteAllInMoc: moc];
+    
+    if ([currentItems count] == 0) {
+        for (int i = 0; i < 7; i++) {
+            Item *item = [Item createInMoc: moc];
+            NSString *title = [horcruxNames objectAtIndex:i];
+            
+            [item setTitle: title];
+            Location *location = [Location createInMoc:moc];
+            [location setUrl: [locations objectAtIndex:i]];
+            [item setLocation: location];
+            
+            NSError *saveError = nil;
+            
+            BOOL success = [[self moc] save: &saveError];
+            
+            if (!success) {
+                [[NSApplication sharedApplication] presentError:saveError];
+            }
+        }
+    }
+
 //    NSFetchRequest *fr = [NSFetchRequest fetchRequestWithEntityName:@"Item"];
 //    NSError *fetchError = nil;
 //    NSArray *allItems = [moc executeFetchRequest:fr error:&fetchError];
@@ -42,11 +78,11 @@
 //    NSLog(@"%@",allItems);
 
     // delete all items
-//    for (Item *singleItem in allItems) {
-//        [moc deleteObject: singleItem];
+//    for (Item *singleItem in [self allItems]) {
+//        [[self moc] deleteObject: singleItem];
 //    }
 //    
-//    [moc save: nil];
+//    [[self moc] save: nil];
     
     [self updateTableViewWithTitles:[self itemTitles]];
 }
@@ -74,29 +110,29 @@
     return titles;
 }
 
-- (IBAction)clickedShow:(id)sender {
+
+- (IBAction)didClickTableViewRow:(id)sender {
+    NSTableView *tableView = sender;
     
-    NSLog(@"clicked %s", __PRETTY_FUNCTION__);
+    NSUInteger row = [tableView selectedRow];
+
     NSStoryboard *sb = [NSStoryboard storyboardWithName:@"Main" bundle:nil];
-    NSViewController *vc = [sb instantiateControllerWithIdentifier:@"BlueVC"];
+    BlueViewController *vc = [sb instantiateControllerWithIdentifier:@"BlueVC"];
     
-//    present as sheet
-//    [self presentViewControllerAsSheet:vc];
+    Item *item = [[self allItems] objectAtIndex:row];
+    NSString *itemName = [item title];
+    [vc setItemName: itemName];
+    [vc setLocationURL: item.location.url];
     
-//    present as modal window
-//    [self presentViewControllerAsModalWindow:vc];
-    
-    
-//    present as popover relative to rect
-//    NSButton *btn = self.showButton;
-//    [self presentViewController:vc
-//        asPopoverRelativeToRect: btn.bounds
-//                         ofView: btn
-//                  preferredEdge: NSMaxYEdge
-//                       behavior: NSPopoverBehaviorTransient];
- 
+    //    present as popover relative to rect
+    [self presentViewController: vc
+        asPopoverRelativeToRect: tableView.bounds
+                         ofView: tableView
+                  preferredEdge: NSMinXEdge
+                       behavior: NSPopoverBehaviorTransient];
     
 }
+
 
 -(void)updateTableViewWithTitles:(NSArray *)titles {
     [self setTitleArray: titles];
@@ -113,7 +149,7 @@
     result.textField.stringValue = [self.titleArray objectAtIndex:row];
     
     if (row % 2) {
-        [result.layer setBackgroundColor: [[NSColor lightGrayColor] CGColor]];
+        [result.layer setBackgroundColor: [[NSColor lightGrayColor] CGColor]]; 
     }
     
     return result;

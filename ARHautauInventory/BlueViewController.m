@@ -16,7 +16,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[self itemNameLabel] setStringValue:[self itemName]];
     // Do view setup here.
+}
+
+- (IBAction)clickedShowLocation:(id)sender {
+    [self openURLWithString: [self locationURL]];
+}
+
+-(void) openURLWithString:(NSString*) string {
+    [[NSWorkspace sharedWorkspace] openURL: [NSURL URLWithString:string]];
 }
 
 @end

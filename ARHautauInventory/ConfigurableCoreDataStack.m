@@ -113,7 +113,8 @@
     // MODEL
     NSURL *modelURL = [[NSBundle mainBundle] URLForResource:self.configuration.modelName withExtension:@"momd"];
     NSManagedObjectModel *model = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
-    
+
+
     
     // STORE & COORDINATOR
     NSURL *storeURL = [self dataFileURL];

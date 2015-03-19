@@ -10,8 +10,6 @@
 
 @interface ViewController : NSViewController <NSTableViewDataSource, NSTableViewDelegate>
 
-@property (weak) IBOutlet NSButton *showButton;
-@property (weak) IBOutlet NSButton *getPicsButton;
 @property (weak) IBOutlet NSTableView *tableView;
 @property(strong, nonatomic) NSArray *titleArray;
 

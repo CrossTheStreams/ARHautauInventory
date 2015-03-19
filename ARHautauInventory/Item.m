@@ -11,6 +11,7 @@
 @implementation Item
 
 @dynamic title;
+@dynamic location;
 @dynamic images;
 
 +(NSString*) entityName {

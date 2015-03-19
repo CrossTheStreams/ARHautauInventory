@@ -10,4 +10,11 @@
 
 @implementation Location
 
+@dynamic url;
+
++(NSString*) entityName {
+    return @"Location";
+}
+
+
 @end

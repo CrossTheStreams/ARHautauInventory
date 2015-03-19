@@ -14,7 +14,7 @@
 		492E21171AA9533000E5E40A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 492E21151AA9533000E5E40A /* Main.storyboard */; };
 		492E21231AA9533000E5E40A /* ARHautauInventoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 492E21221AA9533000E5E40A /* ARHautauInventoryTests.m */; };
 		492E212E1AA953D900E5E40A /* ConfigurableCoreDataStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 492E212D1AA953D900E5E40A /* ConfigurableCoreDataStack.m */; };
-		492E21311AA9582600E5E40A /* Inventory.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 492E212F1AA9582600E5E40A /* Inventory.xcdatamodeld */; };
+		492E21311AA9582600E5E40A /* Item.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 492E212F1AA9582600E5E40A /* Item.xcdatamodeld */; };
 		492E21371AA958CF00E5E40A /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 492E21361AA958CF00E5E40A /* Item.m */; };
 		F9837C1B1AB633D700D947E4 /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = F9837C1A1AB633D700D947E4 /* Image.m */; };
 		F9837C211AB6386500D947E4 /* NSManagedObject+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = F9837C201AB6386500D947E4 /* NSManagedObject+Extensions.m */; };
@@ -48,7 +48,7 @@
 		492E21221AA9533000E5E40A /* ARHautauInventoryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARHautauInventoryTests.m; sourceTree = "<group>"; };
 		492E212C1AA953D900E5E40A /* ConfigurableCoreDataStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigurableCoreDataStack.h; sourceTree = "<group>"; };
 		492E212D1AA953D900E5E40A /* ConfigurableCoreDataStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigurableCoreDataStack.m; sourceTree = "<group>"; };
-		492E21301AA9582600E5E40A /* Inventory.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Inventory.xcdatamodel; sourceTree = "<group>"; };
+		492E21301AA9582600E5E40A /* Item.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Item.xcdatamodel; sourceTree = "<group>"; };
 		492E21351AA958CF00E5E40A /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
 		492E21361AA958CF00E5E40A /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Item.m; sourceTree = "<group>"; };
 		F9837C191AB633D700D947E4 /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
@@ -108,11 +108,9 @@
 				492E210C1AA9533000E5E40A /* AppDelegate.m */,
 				492E212C1AA953D900E5E40A /* ConfigurableCoreDataStack.h */,
 				492E212D1AA953D900E5E40A /* ConfigurableCoreDataStack.m */,
-				492E212F1AA9582600E5E40A /* Inventory.xcdatamodeld */,
+				492E212F1AA9582600E5E40A /* Item.xcdatamodeld */,
 				492E21131AA9533000E5E40A /* Images.xcassets */,
 				492E21151AA9533000E5E40A /* Main.storyboard */,
-				F9837C221AB6515400D947E4 /* BlueViewController.h */,
-				F9837C231AB6515400D947E4 /* BlueViewController.m */,
 				492E21091AA9533000E5E40A /* Supporting Files */,
 			);
 			path = ARHautauInventory;
@@ -174,6 +172,8 @@
 				F9837C2B1AB958E700D947E4 /* Delegates */,
 				492E21101AA9533000E5E40A /* ViewController.h */,
 				492E21111AA9533000E5E40A /* ViewController.m */,
+				F9837C221AB6515400D947E4 /* BlueViewController.h */,
+				F9837C231AB6515400D947E4 /* BlueViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -281,7 +281,7 @@
 				492E21371AA958CF00E5E40A /* Item.m in Sources */,
 				492E212E1AA953D900E5E40A /* ConfigurableCoreDataStack.m in Sources */,
 				492E21121AA9533000E5E40A /* ViewController.m in Sources */,
-				492E21311AA9582600E5E40A /* Inventory.xcdatamodeld in Sources */,
+				492E21311AA9582600E5E40A /* Item.xcdatamodeld in Sources */,
 				492E210F1AA9533000E5E40A /* main.m in Sources */,
 				492E210D1AA9533000E5E40A /* AppDelegate.m in Sources */,
 				F9837C271AB80E1100D947E4 /* Location.m in Sources */,
@@ -488,13 +488,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		492E212F1AA9582600E5E40A /* Inventory.xcdatamodeld */ = {
+		492E212F1AA9582600E5E40A /* Item.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				492E21301AA9582600E5E40A /* Inventory.xcdatamodel */,
+				492E21301AA9582600E5E40A /* Item.xcdatamodel */,
 			);
-			currentVersion = 492E21301AA9582600E5E40A /* Inventory.xcdatamodel */;
-			path = Inventory.xcdatamodeld;
+			currentVersion = 492E21301AA9582600E5E40A /* Item.xcdatamodel */;
+			path = Item.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

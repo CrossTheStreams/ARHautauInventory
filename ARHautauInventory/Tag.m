@@ -10,4 +10,10 @@
 
 @implementation Tag
 
+
++(NSString*) entityName {
+    return @"Tag";
+}
+
+
 @end

@@ -10,4 +10,6 @@
 
 @interface Location : NSManagedObject
 
+@property NSString* url;
+
 @end

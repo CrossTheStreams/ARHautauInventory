@@ -17,7 +17,8 @@
 
 +(instancetype)createInMoc:(NSManagedObjectContext *)moc
 {
-    NSEntityDescription *ed = [NSEntityDescription entityForName:[self entityName] inManagedObjectContext:moc];
+    
+    NSEntityDescription *ed = [NSEntityDescription entityForName: [self entityName] inManagedObjectContext:moc];
     NSManagedObject *obj = [[self alloc] initWithEntity:ed insertIntoManagedObjectContext:moc];
     return obj;
 }

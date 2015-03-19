@@ -9,5 +9,9 @@
 #import <Cocoa/Cocoa.h>
 
 @interface BlueViewController : NSViewController
+@property (weak) IBOutlet NSTextField *itemNameLabel;
+@property (weak, nonatomic) NSString * itemName;
+@property (weak, nonatomic) NSString * locationURL;
+@property (weak) IBOutlet NSButton *showLocation;
 
 @end
