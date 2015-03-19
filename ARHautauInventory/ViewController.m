@@ -23,6 +23,8 @@
     
     NSManagedObject *moc = [self moc];
     
+//    [Item deleteAllInMoc: moc];
+//    
     // All the horcruxes in Harry Potter
     NSArray *horcruxNames = @[
                               @"Tom Riddle's diary",
@@ -47,7 +49,7 @@
     
     
     NSArray *currentItems = [self allItems];
-    [Item deleteAllInMoc: moc];
+
     
     if ([currentItems count] == 0) {
         for (int i = 0; i < 7; i++) {
@@ -118,19 +120,22 @@
 
     NSStoryboard *sb = [NSStoryboard storyboardWithName:@"Main" bundle:nil];
     BlueViewController *vc = [sb instantiateControllerWithIdentifier:@"BlueVC"];
-    
-    Item *item = [[self allItems] objectAtIndex:row];
-    NSString *itemName = [item title];
-    [vc setItemName: itemName];
-    [vc setLocationURL: item.location.url];
-    
-    //    present as popover relative to rect
-    [self presentViewController: vc
-        asPopoverRelativeToRect: tableView.bounds
-                         ofView: tableView
-                  preferredEdge: NSMinXEdge
-                       behavior: NSPopoverBehaviorTransient];
-    
+    NSArray *horcruxes = [self allItems];
+    if ([horcruxes count] >= row) {
+        
+        Item *item = [horcruxes objectAtIndex:row];
+        NSString *itemName = [item title];
+        [vc setItemName: itemName];
+        
+        [vc setLocationURL: [NSString stringWithString: item.location.url]];
+        
+        //    present as popover relative to rect
+        [self presentViewController: vc
+            asPopoverRelativeToRect: tableView.bounds
+                             ofView: tableView
+                      preferredEdge: NSMinXEdge
+                           behavior: NSPopoverBehaviorTransient];
+    }
 }
 
 
