@@ -129,12 +129,14 @@
         
         [vc setLocationURL: [NSString stringWithString: item.location.url]];
         
+        [self presentViewControllerAsSheet:vc];
+        
         //    present as popover relative to rect
-        [self presentViewController: vc
-            asPopoverRelativeToRect: tableView.bounds
-                             ofView: tableView
-                      preferredEdge: NSMinXEdge
-                           behavior: NSPopoverBehaviorTransient];
+//        [self presentViewController: vc
+//            asPopoverRelativeToRect: tableView.bounds
+//                             ofView: tableView
+//                      preferredEdge: NSMinXEdge
+//                           behavior: NSPopoverBehaviorTransient];
     }
 }
 
@@ -162,39 +164,6 @@
 
 -(NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
     return [self.titleArray count];
-}
-
-
-
-
--(IBAction) clickedGetPics:(id)sender {
-
-    NSOpenPanel *op = [NSOpenPanel openPanel];
-    op.allowsMultipleSelection = YES;
-    
-    NSString *path = [@"~/Desktop" stringByExpandingTildeInPath];
-    NSURL *url = [NSURL fileURLWithPath: path];
-    [op setDirectoryURL: url];
-    
-    
-    [op beginWithCompletionHandler:^(NSInteger result) {
-        if (result == YES) {
-            NSLog(@"%@",op.URLs);
-            
-            // for each url in urls
-                //make core data Image entity
-            // entity has UUID
-            // copy image to secure location /com.myapp.Images/uuid.png
-            
-            NSError *error = nil;
-            NSURL *mySecretURL = nil;
-            
-            [[NSFileManager defaultManager] copyItemAtURL: op.URL toURL: mySecretURL error: &error];
-        }
-        
-    
-    }];
-    
 }
 
 

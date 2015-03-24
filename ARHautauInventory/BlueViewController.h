@@ -13,5 +13,6 @@
 @property (weak, nonatomic) NSString * itemName;
 @property (strong, nonatomic) NSString * locationURL;
 @property (weak) IBOutlet NSButton *showLocation;
+@property (weak) IBOutlet NSImageView *itemImage;
 
 @end

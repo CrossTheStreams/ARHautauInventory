@@ -18,8 +18,8 @@
         <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="tags" inverseEntity="Item" syncable="YES"/>
     </entity>
     <elements>
+        <element name="Image" positionX="-63" positionY="-9" width="128" height="75"/>
         <element name="Item" positionX="-63" positionY="-18" width="128" height="103"/>
-        <element name="Image" positionX="-63" positionY="-9" width="128" height="73"/>
         <element name="Location" positionX="-45" positionY="18" width="128" height="73"/>
         <element name="Tag" positionX="-36" positionY="27" width="128" height="58"/>
     </elements>

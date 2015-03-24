@@ -679,7 +679,6 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="SVd-LG-ZiM">
-                                            <rect key="frame" x="0.0" y="0.0" width="238" height="134"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -791,12 +790,23 @@
                                 </connections>
                             </button>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i9G-Vq-7T3">
-                                <rect key="frame" x="108" y="61" width="387" height="207"/>
+                                <rect key="frame" x="108" y="87" width="387" height="181"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="cUn-fH-mCo"/>
                             </imageView>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C59-7N-Ql9">
+                                <rect key="frame" x="241" y="39" width="121" height="32"/>
+                                <buttonCell key="cell" type="push" title="Select Image" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="2c7-MF-yyh">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="clickedSelectImage:" target="zb5-Rl-oAX" id="6UF-iT-emh"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </view>
                     <connections>
+                        <outlet property="itemImage" destination="i9G-Vq-7T3" id="Si0-VV-QBe"/>
                         <outlet property="itemNameLabel" destination="9br-By-Dsa" id="v6l-4n-X6G"/>
                         <outlet property="showLocation" destination="GEq-5h-Bmb" id="wVA-Fs-Ulk"/>
                     </connections>
