@@ -22,8 +22,8 @@
     [self.tableView setDataSource:self];
     [self.tableView setDelegate:self];
     
-//    [[ConfigurableCoreDataStack defaultStack] killCoreDataStack];
-//    
+    [[ConfigurableCoreDataStack defaultStack] killCoreDataStack];
+//
     NSManagedObject *moc = [self moc];
     
     // All the horcruxes in Harry Potter
@@ -146,7 +146,11 @@
         vc.itemIndex = [NSNumber numberWithInteger: row];
         
         if (item.image) {
-            vc.itemImage.image = [[NSImage alloc] initByReferencingFile: item.image.url];
+            NSFileManager *fileManager = [NSFileManager defaultManager];
+            NSURL *directoryURL = [fileManager URLForDirectory: NSApplicationSupportDirectory inDomain: NSUserDomainMask appropriateForURL:nil create:NO error:nil];
+            NSURL *imageLocation = [directoryURL URLByAppendingPathComponent: [@"com.ARHautauInventory/" stringByAppendingString: item.image.url]];
+            
+            [vc.itemImage setImage: [[NSImage alloc] initWithContentsOfURL:imageLocation]];
             
         }
         

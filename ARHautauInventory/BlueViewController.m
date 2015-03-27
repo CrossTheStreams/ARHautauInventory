@@ -71,7 +71,8 @@
                 }
                 
                 // set the url of the copy
-                [image setUrl: [copyLocation absoluteString]];
+                
+                [image setUrl: [copyLocation lastPathComponent]];
                 
                 // save moc
                 [moc save:nil];
