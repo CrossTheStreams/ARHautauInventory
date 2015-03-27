@@ -9,6 +9,7 @@
 #import "BlueViewController.h"
 #import "Image.h"
 #import "ConfigurableCoreDataStack.h"
+#import "ViewController.h"
 
 @interface BlueViewController ()
 
@@ -44,6 +45,7 @@
             NSLog(@"%@",op.URLs);
             NSURL *url = op.URL;
             if (url) {
+                NSFileManager *fileManager = [NSFileManager defaultManager];
                 // fetch moc
                 NSManagedObjectContext *moc = [[ConfigurableCoreDataStack defaultStack] managedObjectContext];
                 // create image object
@@ -52,19 +54,35 @@
                 // create copy file path
                 NSString *uuid = [[[image objectID] URIRepresentation] lastPathComponent];
                 // TODO: Why does this not work yet??
-                NSString *filePath = [[@"~/Library/com.ARHautauInventory/" stringByAppendingString: uuid] stringByAppendingString:@".png"];
-                NSURL *copyLocation = [NSURL fileURLWithPath: filePath];
+                
+                NSURL *directoryURL = [fileManager URLForDirectory: NSApplicationSupportDirectory inDomain: NSUserDomainMask appropriateForURL:nil create:NO error:nil];
+                NSURL *copyLocation = [directoryURL URLByAppendingPathComponent: [@"com.ARHautauInventory/" stringByAppendingString: [uuid stringByAppendingString:@".jpg"]]];
 
+                NSError *error = [[NSError alloc] init];
                 // copy the image file
-                [[NSFileManager defaultManager] copyItemAtURL: op.URL toURL: copyLocation error: nil];
+                BOOL success = [fileManager copyItemAtURL: op.URL toURL: copyLocation error: &error];
+                
+                NSLog(@"successful? %d", success);
+                
+                if (!success) {
+                    
+                    NSLog([error description]);
+                    
+                }
                 
                 // set the url of the copy
-                [image setUrl: [copyLocation lastPathComponent]];
+                [image setUrl: [copyLocation absoluteString]];
+                
                 // save moc
                 [moc save:nil];
                 
                 NSImage *uiImage = [[NSImage alloc] initWithContentsOfURL:copyLocation];
-                [self setItemImage:uiImage];
+                [self.itemImage setImage: uiImage];
+                
+                NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+                
+                [nc postNotificationName: @"addImageToItem" object:nil userInfo: @{@"image" : image, @"itemIndex" : [self itemIndex] }];
+                
             }
         }
         

@@ -7,12 +7,14 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "Item.h"
 
 @interface BlueViewController : NSViewController
 @property (weak) IBOutlet NSTextField *itemNameLabel;
 @property (weak, nonatomic) NSString * itemName;
-@property (strong, nonatomic) NSString * locationURL;
+@property (weak, nonatomic) NSString * locationURL;
 @property (weak) IBOutlet NSButton *showLocation;
 @property (weak) IBOutlet NSImageView *itemImage;
+@property (weak, nonatomic) NSNumber * itemIndex;
 
 @end

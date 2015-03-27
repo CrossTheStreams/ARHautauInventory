@@ -12,6 +12,7 @@
 #import "Item.h"
 #import "Location.h"
 #import "Tag.h"
+#import "Image.h"
 
 @implementation ViewController
 
@@ -21,10 +22,10 @@
     [self.tableView setDataSource:self];
     [self.tableView setDelegate:self];
     
+//    [[ConfigurableCoreDataStack defaultStack] killCoreDataStack];
+//    
     NSManagedObject *moc = [self moc];
     
-//    [Item deleteAllInMoc: moc];
-//    
     // All the horcruxes in Harry Potter
     NSArray *horcruxNames = @[
                               @"Tom Riddle's diary",
@@ -87,6 +88,20 @@
 //    [[self moc] save: nil];
     
     [self updateTableViewWithTitles:[self itemTitles]];
+    
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    
+    [nc addObserverForName: @"addImageToItem" object:nil queue:nil usingBlock:^(NSNotification *note) {
+        
+        NSNumber *itemIndexNum = note.userInfo[@"itemIndex"];
+        NSInteger itemIndex = [itemIndexNum integerValue];
+        Image *image = note.userInfo[@"image"];
+        Item *item = [[self allItems] objectAtIndex: itemIndex];
+        
+        [item setImage:image];
+        [[self moc] save:nil];
+    }];
+    
 }
 
 - (void)setRepresentedObject:(id)representedObject {
@@ -128,15 +143,19 @@
         [vc setItemName: itemName];
         
         [vc setLocationURL: [NSString stringWithString: item.location.url]];
+        vc.itemIndex = [NSNumber numberWithInteger: row];
         
-        [self presentViewControllerAsSheet:vc];
+        if (item.image) {
+            vc.itemImage.image = [[NSImage alloc] initByReferencingFile: item.image.url];
+            
+        }
         
-        //    present as popover relative to rect
-//        [self presentViewController: vc
-//            asPopoverRelativeToRect: tableView.bounds
-//                             ofView: tableView
-//                      preferredEdge: NSMinXEdge
-//                           behavior: NSPopoverBehaviorTransient];
+            //present as popover relative to rect
+        [self presentViewController: vc
+            asPopoverRelativeToRect: tableView.bounds
+                             ofView: tableView
+                      preferredEdge: NSMinXEdge
+                           behavior: NSPopoverBehaviorTransient];
     }
 }
 

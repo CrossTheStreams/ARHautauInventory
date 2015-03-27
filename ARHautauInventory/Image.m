@@ -11,6 +11,7 @@
 @implementation Image
 
 @dynamic url;
+@dynamic item;
 
 +(NSString*) entityName {
     return @"Image";

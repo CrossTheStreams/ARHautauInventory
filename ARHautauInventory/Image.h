@@ -8,9 +8,13 @@
 
 #import <CoreData/CoreData.h>
 #import "NSManagedObject+Extensions.h"
+#import "Item.h"
+
+@class Item;
 
 @interface Image : NSManagedObject
 
 @property (strong, nonatomic) NSString *url;
+@property (strong, nonatomic) Item *item;
 
 @end
