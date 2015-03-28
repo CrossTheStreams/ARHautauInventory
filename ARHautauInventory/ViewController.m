@@ -22,7 +22,7 @@
     [self.tableView setDataSource:self];
     [self.tableView setDelegate:self];
     
-    [[ConfigurableCoreDataStack defaultStack] killCoreDataStack];
+//    [[ConfigurableCoreDataStack defaultStack] killCoreDataStack];
 //
     NSManagedObject *moc = [self moc];
     
@@ -62,14 +62,14 @@
             [location setUrl: [locations objectAtIndex:i]];
             [item setLocation: location];
             
-            NSError *saveError = nil;
-            
-            BOOL success = [[self moc] save: &saveError];
-            
-            if (!success) {
-                [[NSApplication sharedApplication] presentError:saveError];
-            }
         }
+    }
+    
+    NSError *saveError = nil;
+    BOOL success = [[self moc] save: &saveError];
+    
+    if (!success) {
+        [[NSApplication sharedApplication] presentError:saveError];
     }
 
 //    NSFetchRequest *fr = [NSFetchRequest fetchRequestWithEntityName:@"Item"];
@@ -142,6 +142,7 @@
         NSString *itemName = [item title];
         [vc setItemName: itemName];
         
+        
         [vc setLocationURL: [NSString stringWithString: item.location.url]];
         vc.itemIndex = [NSNumber numberWithInteger: row];
         
@@ -150,7 +151,7 @@
             NSURL *directoryURL = [fileManager URLForDirectory: NSApplicationSupportDirectory inDomain: NSUserDomainMask appropriateForURL:nil create:NO error:nil];
             NSURL *imageLocation = [directoryURL URLByAppendingPathComponent: [@"com.ARHautauInventory/" stringByAppendingString: item.image.url]];
             
-            [vc.itemImage setImage: [[NSImage alloc] initWithContentsOfURL:imageLocation]];
+            [vc setImageFileURL: imageLocation];
             
         }
         

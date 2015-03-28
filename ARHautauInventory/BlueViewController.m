@@ -17,13 +17,19 @@
 
 @implementation BlueViewController
 
+-(void) viewWillAppear {
+
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[self itemNameLabel] setStringValue:[self itemName]];
+    [[self itemImage] setImage: [[NSImage alloc] initByReferencingURL: self.imageFileURL]];
     // Do view setup here.
 }
 
 - (IBAction)clickedShowLocation:(id)sender {
+    
     [self openURLWithString: [self locationURL]];
 }
 
@@ -76,9 +82,6 @@
                 
                 // save moc
                 [moc save:nil];
-                
-                NSImage *uiImage = [[NSImage alloc] initWithContentsOfURL:copyLocation];
-                [self.itemImage setImage: uiImage];
                 
                 NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
                 

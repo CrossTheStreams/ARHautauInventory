@@ -12,9 +12,11 @@
 @interface BlueViewController : NSViewController
 @property (weak) IBOutlet NSTextField *itemNameLabel;
 @property (weak, nonatomic) NSString * itemName;
-@property (weak, nonatomic) NSString * locationURL;
+@property (strong, nonatomic) NSString * locationURL;
+@property (strong, nonatomic) NSURL * imageFileURL;
 @property (weak) IBOutlet NSButton *showLocation;
 @property (weak) IBOutlet NSImageView *itemImage;
 @property (weak, nonatomic) NSNumber * itemIndex;
+@property (weak) IBOutlet NSTextFieldCell *tagsField;
 
 @end
