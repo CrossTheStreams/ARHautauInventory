@@ -10,6 +10,7 @@
 
 @implementation Tag
 
+@dynamic name;
 
 +(NSString*) entityName {
     return @"Tag";

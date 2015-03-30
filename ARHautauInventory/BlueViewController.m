@@ -23,19 +23,39 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[self tagTextField] setDelegate:self];
     [[self itemNameLabel] setStringValue:[self itemName]];
     [[self itemImage] setImage: [[NSImage alloc] initByReferencingURL: self.imageFileURL]];
-    // Do view setup here.
+    [[self removeTagButton] setEnabled: NO];
+    
+    [self updateTagsField];
+
+}
+
+-(void) updateTagsField {
+    [[self tagsField] setStringValue:@""];
+    
+    NSUInteger tagCount = [[self tagArray] count];
+    
+    for (int i = 0; i < tagCount; i++) {
+        NSString *nextTag = [[self tagArray] objectAtIndex:i];
+        NSString *tagString = [[self.tagsField stringValue] stringByAppendingString: nextTag];
+        [self.tagsField setStringValue: tagString];
+        if (i != tagCount - 1) {
+            NSString *tagStringWithComma = [[self.tagsField stringValue] stringByAppendingString: @", "];
+            [self.tagsField setStringValue: tagStringWithComma];
+        }
+    }
 }
 
 - (IBAction)clickedShowLocation:(id)sender {
-    
     [self openURLWithString: [self locationURL]];
 }
 
 -(void) openURLWithString:(NSString*) string {
     [[NSWorkspace sharedWorkspace] openURL: [NSURL URLWithString:string]];
 }
+
 
 -(IBAction) clickedSelectImage:(id)sender {
     
@@ -71,9 +91,7 @@
                 NSLog(@"successful? %d", success);
                 
                 if (!success) {
-                    
                     NSLog([error description]);
-                    
                 }
                 
                 // set the url of the copy
@@ -92,6 +110,48 @@
         
     }];
     
+}
+
+-(void) controlTextDidChange:(NSNotification *)obj {
+    NSArray *tagNames = [self tagArray];
+    NSString *tagTextFieldString = [self.tagTextField stringValue];
+    BOOL containsTagName = [tagNames containsObject: tagTextFieldString];
+    [[self addTagButton] setEnabled: !containsTagName];
+    [[self removeTagButton] setEnabled: containsTagName];
+}
+
+- (IBAction)addTagToItem:(id)sender {
+    NSString *name = [[self tagTextField] stringValue];
+    if (!name) {
+        name = @"";
+    }
+    NSString *trimmedName = [name stringByTrimmingCharactersInSet:
+                             [NSCharacterSet whitespaceCharacterSet]];
+    if (![trimmedName isEqualToString:@""]) {
+        
+        NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+        [[self tagTextField] setStringValue:@""];
+        [nc postNotificationName: @"addTagToItem" object:nil userInfo: @{@"name" : trimmedName, @"itemIndex" : [self itemIndex] }];
+    }
+    NSArray *unsortedTagNames = [[self tagArray] arrayByAddingObject: trimmedName];
+    NSArray *sortedTagNmes = [unsortedTagNames sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
+    [self setTagArray: sortedTagNmes];
+    [self updateTagsField];
+}
+
+
+- (IBAction)removeTagFromItem:(id)sender {
+    NSString *name = [[self tagTextField] stringValue];
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [[self tagTextField] setStringValue:@""];
+    [nc postNotificationName: @"removeTagFromItem" object:nil userInfo: @{@"name" : name, @"itemIndex" : [self itemIndex] }];
+
+    NSIndexSet* indexes = [[self tagArray] indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+        return ![obj isEqualToString: name];
+    }];
+    NSArray* newTags = [[self tagArray] objectsAtIndexes:indexes];
+    [self setTagArray: newTags];
+    [self updateTagsField];
 }
 
 @end

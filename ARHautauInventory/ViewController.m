@@ -22,6 +22,8 @@
     [self.tableView setDataSource:self];
     [self.tableView setDelegate:self];
     
+    [self.searchField setDelegate:self];
+    
 //    [[ConfigurableCoreDataStack defaultStack] killCoreDataStack];
 //
     NSManagedObject *moc = [self moc];
@@ -47,6 +49,15 @@
                            @"https://www.google.com/maps/@51.476118,-0.070724,8z"
                            ];
     
+    NSArray *tags = @[@"journal",
+                      @"goblet",
+                      @"jewel",
+                      @"shiny",
+                      @"Voldemort",
+                      @"snake",
+                      @"Daniel Radcliffe"
+                      ];
+    
     
     
     NSArray *currentItems = [self allItems];
@@ -61,7 +72,10 @@
             Location *location = [Location createInMoc:moc];
             [location setUrl: [locations objectAtIndex:i]];
             [item setLocation: location];
-            
+            Tag *itemTag = [Tag createInMoc:moc];
+            [itemTag setName: [tags objectAtIndex:i]];
+            NSSet *tagSet = [[NSSet alloc] initWithObjects: itemTag, nil];
+            [item setTags: tagSet];
         }
     }
     
@@ -71,21 +85,6 @@
     if (!success) {
         [[NSApplication sharedApplication] presentError:saveError];
     }
-
-//    NSFetchRequest *fr = [NSFetchRequest fetchRequestWithEntityName:@"Item"];
-//    NSError *fetchError = nil;
-//    NSArray *allItems = [moc executeFetchRequest:fr error:&fetchError];
-    
-    // Do any additional setup after loading the view.
-    
-//    NSLog(@"%@",allItems);
-
-    // delete all items
-//    for (Item *singleItem in [self allItems]) {
-//        [[self moc] deleteObject: singleItem];
-//    }
-//    
-//    [[self moc] save: nil];
     
     [self updateTableViewWithTitles:[self itemTitles]];
     
@@ -101,6 +100,42 @@
         [item setImage:image];
         [[self moc] save:nil];
     }];
+    
+    [nc addObserverForName: @"addTagToItem" object:nil queue:nil usingBlock:^(NSNotification *note) {
+        
+        NSManagedObjectContext *moc = [self moc];
+        NSNumber *itemIndexNum = note.userInfo[@"itemIndex"];
+        NSInteger itemIndex = [itemIndexNum integerValue];
+        NSString *tagName = note.userInfo[@"name"];
+        
+        Tag *tag = [Tag createInMoc: moc];
+        [tag setName:tagName];
+        
+        Item *item = [[self allItems] objectAtIndex: itemIndex];
+        [item setTags: [[item tags] setByAddingObject:tag]];
+        
+        [moc save:nil];
+    }];
+    
+    [nc addObserverForName: @"removeTagFromItem" object:nil queue:nil usingBlock:^(NSNotification *note) {
+        
+        NSManagedObjectContext *moc = [self moc];
+        NSNumber *itemIndexNum = note.userInfo[@"itemIndex"];
+        NSInteger itemIndex = [itemIndexNum integerValue];
+        NSString *tagName = note.userInfo[@"name"];
+        
+        Item *item = [[self allItems] objectAtIndex: itemIndex];
+        NSSet *tagSet = [[item tags] filteredSetUsingPredicate: [NSPredicate predicateWithFormat:@"name != %@", tagName]];
+
+        [item setTags: tagSet];
+        
+        [moc save:nil];
+    }];
+    
+}
+
+-(void) controlTextDidChange:(NSNotification *)obj {
+
     
 }
 
@@ -142,9 +177,16 @@
         NSString *itemName = [item title];
         [vc setItemName: itemName];
         
-        
         [vc setLocationURL: [NSString stringWithString: item.location.url]];
         vc.itemIndex = [NSNumber numberWithInteger: row];
+        
+        NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+        NSArray *tagArray = [item.tags sortedArrayUsingDescriptors:@[descriptor]];
+        NSArray *tagNames = [tagArray valueForKey:@"name"];
+        
+        if ([tagNames count] > 0) {
+            [vc setTagArray: tagNames];
+        }
         
         if (item.image) {
             NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -155,7 +197,7 @@
             
         }
         
-            //present as popover relative to rect
+        //present as popover relative to rect
         [self presentViewController: vc
             asPopoverRelativeToRect: tableView.bounds
                              ofView: tableView

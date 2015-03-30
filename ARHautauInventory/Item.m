@@ -13,6 +13,7 @@
 @dynamic title;
 @dynamic location;
 @dynamic image;
+@dynamic tags;
 
 +(NSString*) entityName {
     return @"Item";

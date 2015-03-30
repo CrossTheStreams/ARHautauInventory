@@ -17,6 +17,7 @@
 @property (strong, nonatomic) NSString *title;
 @property (strong, nonatomic) Location *location;
 @property (strong, nonatomic) Image *image;
+@property (strong, nonatomic) NSSet *tags;
 
 
 @end

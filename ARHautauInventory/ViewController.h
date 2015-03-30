@@ -8,10 +8,11 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface ViewController : NSViewController <NSTableViewDataSource, NSTableViewDelegate>
+@interface ViewController : NSViewController <NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate>
 
 @property (weak) IBOutlet NSTableView *tableView;
 @property(strong, nonatomic) NSArray *titleArray;
+@property (weak) IBOutlet NSTextField *searchField;
 
 
 @end

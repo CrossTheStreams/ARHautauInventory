@@ -10,4 +10,6 @@
 
 @interface Tag : NSManagedObject
 
+@property NSString* name;
+
 @end

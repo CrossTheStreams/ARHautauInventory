@@ -756,6 +756,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="searchField" destination="dem-Tw-L6V" id="Qpg-VD-k8p"/>
                         <outlet property="tableView" destination="SVd-LG-ZiM" id="E9R-9I-Hee"/>
                     </connections>
                 </viewController>
@@ -772,7 +773,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9br-By-Dsa">
-                                <rect key="frame" x="106" y="276" width="391" height="39"/>
+                                <rect key="frame" x="106" y="289" width="391" height="39"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Item Name" id="6QH-YC-T0v">
                                     <font key="font" size="24" name="HelveticaNeue"/>
                                     <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -790,7 +791,7 @@
                                 </connections>
                             </button>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i9G-Vq-7T3">
-                                <rect key="frame" x="108" y="87" width="387" height="181"/>
+                                <rect key="frame" x="181" y="126" width="241" height="155"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="cUn-fH-mCo"/>
                             </imageView>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C59-7N-Ql9">
@@ -804,20 +805,51 @@
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nZB-Js-ggB">
-                                <rect key="frame" x="61" y="63" width="480" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="Jku-mT-nlI">
+                                <rect key="frame" x="61" y="101" width="480" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" id="Jku-mT-nlI">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hxp-Rx-EaM">
+                                <rect key="frame" x="346" y="55" width="91" height="32"/>
+                                <buttonCell key="cell" type="push" title="Add Tag" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="C5Z-gD-avc">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="addTagToItem:" target="zb5-Rl-oAX" id="mnO-pE-HwK"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LrR-AY-E8R">
+                                <rect key="frame" x="437" y="57" width="116" height="32"/>
+                                <buttonCell key="cell" type="push" title="Remove Tag" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="x4l-A6-cZr">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="removeTagFromItem:" target="zb5-Rl-oAX" id="tiG-jI-8eM"/>
+                                </connections>
+                            </button>
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RSe-lh-yfN">
+                                <rect key="frame" x="176" y="63" width="163" height="22"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="fki-hC-3Og">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                     </view>
                     <connections>
+                        <outlet property="addTagButton" destination="Hxp-Rx-EaM" id="qK9-6b-oS1"/>
                         <outlet property="itemImage" destination="i9G-Vq-7T3" id="Si0-VV-QBe"/>
                         <outlet property="itemNameLabel" destination="9br-By-Dsa" id="v6l-4n-X6G"/>
+                        <outlet property="removeTagButton" destination="LrR-AY-E8R" id="2aj-aS-xyh"/>
                         <outlet property="showLocation" destination="GEq-5h-Bmb" id="wVA-Fs-Ulk"/>
-                        <outlet property="tagsField" destination="Jku-mT-nlI" id="D7V-MQ-TbB"/>
+                        <outlet property="tagTextField" destination="RSe-lh-yfN" id="gLO-8t-z3v"/>
+                        <outlet property="tagsField" destination="nZB-Js-ggB" id="Fhn-gj-jo7"/>
                     </connections>
                 </viewController>
                 <customObject id="2lD-o7-Oao" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
