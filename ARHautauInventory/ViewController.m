@@ -60,10 +60,12 @@
     
     
     
-    NSArray *currentItems = [self allItems];
+    if ([[self currentItems] count] == 0) {
+        [self setCurrentItems: [self allItems]];
+    }
 
     
-    if ([currentItems count] == 0) {
+    if ([[self currentItems] count] == 0) {
         for (int i = 0; i < 7; i++) {
             Item *item = [Item createInMoc: moc];
             NSString *title = [horcruxNames objectAtIndex:i];
@@ -86,7 +88,7 @@
         [[NSApplication sharedApplication] presentError:saveError];
     }
     
-    [self updateTableViewWithTitles:[self itemTitles]];
+    [self updateTableViewWithTitles: [self itemTitles]];
     
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     
@@ -135,8 +137,21 @@
 }
 
 -(void) controlTextDidChange:(NSNotification *)obj {
-
-    
+    NSString *searchString = [self.searchField stringValue];
+    if ([searchString isEqualToString:@""]) {
+        NSArray *items = [self allItems];
+        [self setCurrentItems: items];
+        [self updateTableViewWithTitles: [self itemTitles]];
+    } else {
+        NSManagedObjectContext *moc = [self moc];
+        
+        NSFetchRequest *fr = [NSFetchRequest fetchRequestWithEntityName:@"Item"];
+        [fr setPredicate:[NSPredicate predicateWithFormat:@"title contains %@ OR ANY tags.name like %@",searchString, searchString]];
+        NSError *fetchError = nil;
+        NSArray *items = [[self moc] executeFetchRequest:fr error:&fetchError];
+        [self setCurrentItems: items];
+        [self updateTableViewWithTitles: [self itemTitles]];
+    }
 }
 
 - (void)setRepresentedObject:(id)representedObject {
@@ -157,7 +172,7 @@
 }
 
 -(NSArray*) itemTitles {
-    NSArray *items = [self allItems];
+    NSArray *items = [self currentItems];
     NSArray *titles = [items valueForKey: @"title"];
     return titles;
 }

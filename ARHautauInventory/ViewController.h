@@ -14,6 +14,8 @@
 @property(strong, nonatomic) NSArray *titleArray;
 @property (weak) IBOutlet NSTextField *searchField;
 
+@property(strong, nonatomic) NSArray *currentItems;
+
 
 @end
 
