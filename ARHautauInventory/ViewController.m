@@ -17,6 +17,7 @@
 @implementation ViewController
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     
     [self.tableView setDataSource:self];
@@ -185,7 +186,7 @@
 
     NSStoryboard *sb = [NSStoryboard storyboardWithName:@"Main" bundle:nil];
     BlueViewController *vc = [sb instantiateControllerWithIdentifier:@"BlueVC"];
-    NSArray *horcruxes = [self allItems];
+    NSArray *horcruxes = [self currentItems];
     if ([horcruxes count] >= row) {
         
         Item *item = [horcruxes objectAtIndex:row];

@@ -10,6 +10,8 @@
 
 -(instancetype)initWithConfigurator:(id<StackConfigurator>)config
 {
+    
+
     self = [super init];
     if (self) {
         _storeType = [config storeType];
